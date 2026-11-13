@@ -1,48 +1,48 @@
-# تطبيق معرض السيارات (Flutter)
+# Car Showroom App
 
-> يحتاج Flutter 3.27 أو أحدث.
+A cross-platform car showroom application built with **Flutter and Dart**, focused on browsing vehicles and comparing options through a clean mobile interface.
 
-## التشغيل
+## Features
+- Browse a car catalog with list and grid layouts
+- Search, filter, and sort available cars
+- View detailed vehicle information
+- Compare up to three cars
+- Save favorite cars and view recently viewed vehicles
+- Add new car listings
+- Book test drives
+- Calculate estimated vehicle installments
+- Light and dark themes
+- Arabic and English localization
+
+## Tech Stack
+- Flutter / Dart
+- Provider for state management
+- Repository pattern to separate data access from UI
+- Mock repository and local in-memory data
+
+## Architecture
+```text
+lib/
+  core/        # Theme, constants, formatting
+  models/      # Car, booking, and filter models
+  data/        # Repository contract, mock repository, catalog
+  providers/   # Application state
+  screens/     # Main application screens
+  widgets/     # Reusable UI components
+```
+
+## Getting Started
+Requires Flutter 3.27 or later.
+
 ```bash
-flutter create --org com.yourcompany --project-name car_showroom .
 flutter pub get
 flutter run
 ```
-> أمر `flutter create .` بيولّد فولدرات android/ios ومش هيمسح كود lib.
 
-## إعدادات مطلوبة لفتح الاتصال/واتساب (url_launcher)
-**Android** — في `android/app/src/main/AndroidManifest.xml` قبل `<application>`:
-```xml
-<queries>
-  <intent><action android:name="android.intent.action.VIEW"/><data android:scheme="https"/></intent>
-  <intent><action android:name="android.intent.action.DIAL"/><data android:scheme="tel"/></intent>
-</queries>
-```
-**iOS** — في `ios/Runner/Info.plist`:
-```xml
-<key>LSApplicationQueriesSchemes</key>
-<array><string>tel</string><string>https</string></array>
-```
+If the platform folders are not present in your local copy, generate them with Flutter's project-generation command before running the app.
 
-## الميزات
-- ثيم داكن/فاتح بتدرجات عصرية (زر تبديل في الرئيسية وصفحة المعرض)
-- حاسبة تقسيط (مقدم / مدة / فائدة) مع ربط بأي سيارة
-- مقارنة حتى 3 سيارات مع إبراز الأفضل في كل بند
-- إضافة سيارة جديدة (من الرئيسية أو صفحة المعرض) مع كتالوج 30 ماركة وموديلاتها
-- عرض قائمة أو شبكة، فلاتر وترتيب، شاهدتها مؤخرًا، مفضلة، حجز تجربة قيادة
+## Data & Backend
+The current version uses mock/local data. The repository abstraction is intended to make a future API-backed implementation easier; a production backend and persistent booking service are not included yet.
 
-## المعمارية
-```
-lib/
- core/       theme, constants, format
- models/     Car, Booking, CarFilter
- data/       CarRepository (interface) + MockCarRepository + CarCatalog
- providers/  CarsProvider (بحث/فلاتر/ترتيب), FavoritesProvider
- screens/    splash, shell, home, browse, details, booking, favorites, more
- widgets/    CarCard, CarImage, FilterSheet, state views
-```
-
-## ربط الداتا لاحقًا
-1. اعمل `lib/data/api_car_repository.dart` يـ implements `CarRepository` (استخدم `http` أو `dio` + `Car.fromJson`).
-2. في `main.dart` بدّل `MockCarRepository()` بـ `ApiCarRepository()`.
-3. الصور: املا `imageUrls` وهتظهر تلقائيًا بدل الـ placeholder.
+## Repository
+https://github.com/abdallahkali/car_app
